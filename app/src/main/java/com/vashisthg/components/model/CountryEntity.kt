@@ -10,22 +10,28 @@ import com.vashisthg.components.model.TableName.Names.COUNTRIES
 @Entity(tableName = COUNTRIES)
 class CountryEntity : Country {
 
-    constructor()
+    @PrimaryKey
+    private var id: Int = -1
 
-    constructor(country: Country) {
-        this.id = country.id
-        this.name = country.name
-        this.population = country.population
+    private var name: String = ""
+
+    private var population: Long = -1
+
+    override fun getId() = id
+
+    override fun getName() = name
+
+    override fun getPopulation() = population
+
+    fun setId(id: Int) {
+        this.id = id
     }
 
-    @PrimaryKey
-    override var id: Int = 0
-        set(value) {}
+    fun setName(name: String) {
+        this.name = name
+    }
 
-    override var name: String
-        get() = name
-        set(value) {}
-
-    override var population: Long = 0
-        set(value) {}
+    fun setPopulation(population: Long) {
+        this.population = population
+    }
 }

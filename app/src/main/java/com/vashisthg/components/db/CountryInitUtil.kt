@@ -1,5 +1,6 @@
 package com.vashisthg.components.db
 
+import android.util.Log
 import com.vashisthg.components.model.CountryEntity
 import java.util.*
 
@@ -7,6 +8,7 @@ import java.util.*
  * Created by gauravvashisth on 24/05/17.
  */
 class CountryInitUtil {
+    private var TAG = "CountryInitUtil"
     private val COUNTRIES = arrayOf("India", "Sweden", "China", "USA", "England", "Canada", "Germany")
 
 
@@ -19,11 +21,14 @@ class CountryInitUtil {
         val countryList = ArrayList<CountryEntity>(COUNTRIES.size)
         COUNTRIES.indices.forEach { i ->
             val countryEntity = CountryEntity()
-            countryEntity.id = i
-            countryEntity.name = COUNTRIES[i]
-            countryEntity.population = (i * 10000000).toLong()
+            countryEntity.setId(i)
+            countryEntity.setName(COUNTRIES[i])
+            countryEntity.setPopulation((i * 10000000).toLong())
             countryList.add(countryEntity)
+            Log.d(TAG,  "countryEntity: " + countryEntity.toString())
+
         }
+        Log.d(TAG, "size :" + countryList.size)
         return countryList
     }
 

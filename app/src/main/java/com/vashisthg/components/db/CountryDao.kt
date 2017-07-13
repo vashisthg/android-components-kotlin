@@ -20,10 +20,10 @@ interface CountryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(products: List<CountryEntity>)
 
-    @Query("SELECT * FROM ${TableName.COUNTRIES} WHERE id = :countryId")
+    @Query("SELECT * FROM ${TableName.COUNTRIES} WHERE id = :p0")
     fun loadCountry(countryId: Int): LiveData<CountryEntity>
 
-    @Query("SELECT * FROM ${TableName.COUNTRIES} WHERE id = :id")
+    @Query("SELECT * FROM ${TableName.COUNTRIES} WHERE id = :p0")
     fun loadCountrySync(id: Int): CountryEntity
 
 //    @Query("select * from countries where id = :productId")

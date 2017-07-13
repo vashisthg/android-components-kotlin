@@ -23,7 +23,7 @@ class CountryAdapter : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() 
         } else {
             var result: DiffUtil.DiffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
                 override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                    return countryList?.get(oldItemPosition)?.id == newCountryList?.get(newItemPosition)?.id
+                    return countryList?.get(oldItemPosition)?.getId() == newCountryList?.get(newItemPosition)?.getId()
                 }
 
                 override fun getOldListSize(): Int {
@@ -37,8 +37,8 @@ class CountryAdapter : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() 
                 override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
                     val oldCountry = countryList?.get(oldItemPosition)
                     val newCountry = newCountryList?.get(newItemPosition)
-                    return oldCountry?.id == newCountry?.id && oldCountry?.name == newCountry?.name &&
-                            oldCountry?.population == newCountry?.population
+                    return oldCountry?.getId() == newCountry?.getId() && oldCountry?.getName() == newCountry?.getName() &&
+                            oldCountry?.getPopulation() == newCountry?.getPopulation()
                 }
             })
             countryList = newCountryList
@@ -48,8 +48,8 @@ class CountryAdapter : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() 
 
     override fun onBindViewHolder(holder: CountryViewHolder?, position: Int) {
         val country = countryList?.get(position)
-        holder?.nameView?.text = country?.name
-        holder?.populationView?.text = country?.population.toString()
+        holder?.nameView?.text = country?.getName()
+        holder?.populationView?.text = country?.getPopulation().toString()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, position: Int): CountryViewHolder {

@@ -39,9 +39,9 @@ class DatabaseCreator {
         }
 
         isDatabaseCreated.setValue(false)// Trigger an update to show a loading screen.
-        object : AsyncTask<Context, Void, Void>() {
+        object : AsyncTask<Context, Void, AppDatabase>() {
 
-            override fun doInBackground(vararg params: Context): Void? {
+            override fun doInBackground(vararg params: Context): AppDatabase? {
                 Log.d("DatabaseCreator",
                         "Starting bg job " + Thread.currentThread().name)
 
@@ -62,11 +62,12 @@ class DatabaseCreator {
                 Log.d("DatabaseCreator",
                         "DB was populated in thread " + Thread.currentThread().name)
 
-                database = db
-                return null
+                return db
             }
 
-            override fun onPostExecute(ignored: Void) {
+            override fun onPostExecute(db: AppDatabase) {
+
+                database = db
                 // Now on the main thread, notify observers that the db is created and ready.
                 isDatabaseCreated.setValue(true)
             }
